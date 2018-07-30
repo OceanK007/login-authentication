@@ -45,3 +45,6 @@
 
 # URL
 https://webpack.js.org/guides/getting-started/#basic-setup
+
+# URL: Firebase setup
+https://firebase.google.com/docs/auth/web/start
