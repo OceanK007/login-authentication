@@ -1,32 +1,9 @@
 import firebase from 'firebase';
 import { createHTMLElement } from '../../js/service';
 
-var googleLoginButton = createHTMLElement(
-`<div>
-    <div>
-
-    </div>
-    <div>
-        <button id="google-login" class="btn btn-success">Login With Google</button>
-        <button id="google-signout" class="btn btn-success">Signout</button>
-    <div>
-</div>`);
-
-googleLoginButton.querySelector('#google-login').addEventListener('click', function() 
-{
-    googleLogin();
-})
-googleLoginButton.querySelector('#google-signout').addEventListener('click', function() 
-{
-    googleLogout();
-})
-$("body").append(googleLoginButton);
-
-// ##################################################################### //
-
 var provider = new firebase.auth.GoogleAuthProvider();
 
-function googleLogin()
+export function googleLogin()
 {
     function newLoginHappened(user)
     {
@@ -49,7 +26,7 @@ function userInfo(user)
     console.log(user);
 }
 
-function googleLogout()
+export function googleLogout()
 {
     firebase.auth().signOut().then(function() 
     {
