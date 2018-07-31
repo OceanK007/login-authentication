@@ -11,7 +11,7 @@ export function gitLogoutComponent()
             <span>Welcome to dashboard</span>
         </div>
         <div>
-            <button id="git-signout" class="btn btn-success">Signout</button>
+            <button id="git-signout" class="btn btn-success">Sign out</button>
         </div>        
     </div>`);
 

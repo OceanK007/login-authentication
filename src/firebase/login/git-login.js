@@ -1,72 +1,76 @@
+import '../firebase-config';
 import firebase from 'firebase';
 import { createComponents } from '../../js/controller-main';
+import { createHomeView } from '../../home/home';
+import { createDashboardView } from '../../dashboard/dashboard';
 
 var provider = new firebase.auth.GithubAuthProvider();
 
-export function gitLogin() 
-{
+export function userLoginStatusCheck()
+{  
+    // This will be called in each sign-in/sign-out (i.e. one each state change)
+    // It can be defined in a function as well to check user state
     firebase.auth().onAuthStateChanged(function(user) 
     {
         if (user) 
         {
             console.log("State changed: User exist");
             console.log(user);
+            createDashboardView();
         }
         else
         {
-            console.log("State changed: User doesn't exist");
+            console.log("State changed: User doesn't exist");     
         }  
     }); 
+}
 
-    firebase.auth().signInWithPopup(provider)
-    .then(function(result) 
+export function gitLogin() 
+{
+    console.log(firebase.auth().currentUser)
+    if(!firebase.auth().currentUser)
     {
-        var token = result.credential.accessToken;
-        var user = result.user;
-            
-        console.log(result);
-        console.log(token)
-        console.log(user)
+        firebase.auth().signInWithPopup(provider)
+        .then(function(result) 
+        {
+            var token = result.credential.accessToken;
+            var user = result.user;
+                
+            console.log(result);
+            console.log(user);
+            console.log(token);
 
+            createComponents('dashboard');
+
+        }).catch(function(error) 
+        {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+                
+            console.log(error.code)
+            console.log(error.message)
+        });
+    }
+    else
+    {
+        console.log("User already exist");
         createComponents('dashboard');
-
-    }).catch(function(error) 
-    {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-            
-        console.log(error.code)
-        console.log(error.message)
-    });
+    }
 }
 
 export function gitLogout()
 {
-   firebase.auth().signOut()
-   .then(function() 
-   {
-      console.log('Signout successful!')
+    firebase.auth().signOut()
+    .then(function() 
+    {
+        console.log('Signout successful!')
+    }, function(error) 
+    {
+        console.log('Signout failed')
+    });
 
-      createComponents('home');
-   }, function(error) 
-   {
-      console.log('Signout failed')
-   });
+    createComponents('home');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // function toggleSignIn() 
 // {
@@ -169,64 +173,4 @@ export function gitLogout()
 //     // [END authstatelistener]
 
 //     document.getElementById('git-login').addEventListener('click', toggleSignIn, false);
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//var provider = new firebase.auth.GoogleAuthProvider();
-
-// export function gitLogin()
-// {
-//     function newLoginHappened(user)
-//     {
-//         if(user)
-//         {
-//             userInfo(user);
-//         }
-//         else
-//         {
-//             //firebase.auth().signInWithRedirect(provider);
-//             firebase.auth().signInWithPopup(provider);
-//         }
-//     }
-
-//     firebase.auth().onAuthStateChanged(newLoginHappened);
-// }
-
-// function userInfo(user)
-// {
-//     console.log(user);
-// }
-
-// export function gitLogout()
-// {
-//     firebase.auth().signOut().then(function() 
-//     {
-//         console.log("Sign out successfully");
-//         // Sign-out successful.
-//     }).catch(function(error) 
-//     {
-//         // An error happened.
-//     });
 // }

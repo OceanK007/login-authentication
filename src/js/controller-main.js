@@ -1,13 +1,13 @@
 import { createHomeView } from '../home/home';
 import { createDashboardView } from '../dashboard/dashboard';
-import '../firebase/firebase-config';
+import { userLoginStatusCheck } from '../firebase/login/git-login';
 
 export function createComponents(url)
 {
     switch(url)
     {
         case 'home':
-            createHomeView();
+            createHomeView();            
             break;
         case 'dashboard':
             createDashboardView();
@@ -15,4 +15,10 @@ export function createComponents(url)
     }
 }
 
-window.onload = createComponents('home');
+function init()
+{
+    createComponents('home');
+    userLoginStatusCheck();
+}
+
+window.onload = init;
