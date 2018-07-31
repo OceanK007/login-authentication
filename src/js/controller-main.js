@@ -1,5 +1,6 @@
 import { createHomeView } from '../home/home';
 import { createDashboardView } from '../dashboard/dashboard';
+import { config } from '../firebase/firebase-config';;
 
 function createComponents(url)
 {
