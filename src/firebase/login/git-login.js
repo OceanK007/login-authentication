@@ -5,24 +5,39 @@ var provider = new firebase.auth.GithubAuthProvider();
 
 export function gitLogin() 
 {
-   firebase.auth().signInWithPopup(provider)
-   .then(function(result) 
-   {
-      var token = result.credential.accessToken;
-      var user = result.user;
-		
-      console.log(token)
-      console.log(user)
+    firebase.auth().onAuthStateChanged(function(user) 
+    {
+        if (user) 
+        {
+            console.log("State changed: User exist");
+            console.log(user);
+        }
+        else
+        {
+            console.log("State changed: User doesn't exist");
+        }  
+    }); 
 
-      createComponents('dashboard');
+    firebase.auth().signInWithPopup(provider)
+    .then(function(result) 
+    {
+        var token = result.credential.accessToken;
+        var user = result.user;
+            
+        console.log(result);
+        console.log(token)
+        console.log(user)
 
-   }).catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-		
-      console.log(error.code)
-      console.log(error.message)
-   });
+        createComponents('dashboard');
+
+    }).catch(function(error) 
+    {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+            
+        console.log(error.code)
+        console.log(error.message)
+    });
 }
 
 export function gitLogout()
