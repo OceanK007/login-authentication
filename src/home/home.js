@@ -1,7 +1,7 @@
-import { googleLoginComponent, homeViewHolderId } from './home-view';
+import { gitLoginComponent, homeViewHolderId } from './home-view';
 
 export function createHomeView()
 {
-    var gLoginComp = googleLoginComponent();
-    $("#"+homeViewHolderId).append(gLoginComp);
+    var gLoginComp = gitLoginComponent();
+    $("#"+homeViewHolderId).empty().append(gLoginComp);
 }

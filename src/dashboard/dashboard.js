@@ -1,7 +1,7 @@
-import { dashboardViewHolderId, googleLogoutComponent } from './dashboard-view';
+import { dashboardViewHolderId, gitLogoutComponent } from './dashboard-view';
 
 export function createDashboardView()
 {
-    var gLogoutComp = googleLogoutComponent();
-    $("#"+dashboardViewHolderId).append(gLogoutComp);
+    var gLogoutComp = gitLogoutComponent();
+    $("#"+dashboardViewHolderId).empty().append(gLogoutComp);
 }

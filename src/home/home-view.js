@@ -1,21 +1,21 @@
 import { createHTMLElement } from '../js/service';
-import { googleLogin } from '../firebase/login/google-login';
+import { gitLogin } from '../firebase/login/git-login';
 
 export const homeViewHolderId = 'container';
 
-export function googleLoginComponent()
+export function gitLoginComponent()
 {
-    var googleLoginButton = createHTMLElement(
+    var gitLoginButton = createHTMLElement(
     `<div>
         <div>
-            <button id="google-login" class="btn btn-success">Login With Google</button>
+            <button id="git-login" class="btn btn-success">Login With Git</button>
         </div>        
     </div>`);
 
-    googleLoginButton.querySelector('#google-login').addEventListener('click', function() 
+    gitLoginButton.querySelector('#git-login').addEventListener('click', function() 
     {
-        googleLogin();
+        gitLogin();
     })
 
-    return googleLoginButton;
+    return gitLoginButton;
 }

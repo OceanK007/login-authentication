@@ -1,7 +1,8 @@
 import { createHomeView } from '../home/home';
 import { createDashboardView } from '../dashboard/dashboard';
+import '../firebase/firebase-config';
 
-function createComponents(url)
+export function createComponents(url)
 {
     switch(url)
     {

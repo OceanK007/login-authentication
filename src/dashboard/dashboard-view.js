@@ -1,25 +1,25 @@
 import { createHTMLElement } from '../js/service';
-import { googleLogout } from '../firebase/login/google-login';
+import { gitLogout } from '../firebase/login/git-login';
 
 export const dashboardViewHolderId = 'container';
 
-export function googleLogoutComponent()
+export function gitLogoutComponent()
 {
-    var googleLogoutButton = createHTMLElement(
+    var gitLogoutButton = createHTMLElement(
     `<div>
         <div>
             <span>Welcome to dashboard</span>
         </div>
         <div>
-            <button id="google-signout" class="btn btn-success">Signout</button>
+            <button id="git-signout" class="btn btn-success">Signout</button>
         </div>        
     </div>`);
 
-    googleLogoutButton.querySelector('#google-signout').addEventListener('click', function() 
+    gitLogoutButton.querySelector('#git-signout').addEventListener('click', function() 
     {
-        googleLogout();
+        gitLogout();
     })
 
-    return googleLogoutButton;
+    return gitLogoutButton;
 }
 
