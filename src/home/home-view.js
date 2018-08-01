@@ -8,7 +8,7 @@ export function gitLoginComponent()
     var gitLoginButton = createHTMLElement(
     `<div>
         <div>
-            <button id="git-login" class="btn btn-success">Login With Git</button>
+            <button id="git-login" class="btn btn-success" disabled>Login With Git</button>
         </div>        
     </div>`);
 

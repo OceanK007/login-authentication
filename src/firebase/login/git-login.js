@@ -20,16 +20,20 @@ export function userLoginStatusCheck()
         }
         else
         {
-            console.log("State changed: User doesn't exist");     
+            document.getElementById('git-login').disabled = false;
+            console.log("State changed: User doesn't exist"); 
         }  
     }); 
 }
 
 export function gitLogin() 
 {
-    console.log(firebase.auth().currentUser)
+    //console.log(firebase.auth().currentUser)
+   
     if(!firebase.auth().currentUser)
     {
+        document.getElementById('git-login').disabled = true;
+        
         firebase.auth().signInWithPopup(provider)
         .then(function(result) 
         {
@@ -44,6 +48,7 @@ export function gitLogin()
 
         }).catch(function(error) 
         {
+            document.getElementById('git-login').disabled = false;
             var errorCode = error.code;
             var errorMessage = error.message;
                 
@@ -63,13 +68,13 @@ export function gitLogout()
     firebase.auth().signOut()
     .then(function() 
     {
-        console.log('Signout successful!')
+        createComponents('home');
+        console.log('Signout successful!');
+
     }, function(error) 
     {
         console.log('Signout failed')
-    });
-
-    createComponents('home');
+    });   
 }
 
 // function toggleSignIn() 
